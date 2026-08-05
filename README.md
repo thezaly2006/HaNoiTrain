@@ -33,7 +33,7 @@
   --rad:14px; --hh:74px;
   --sh:0 14px 34px -16px rgba(96,74,20,.35);
 }
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 14px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 14px);overflow-x:hidden;max-width:100vw}
 body{font-family:var(--serif);background:var(--white);color:var(--ink);line-height:1.7;font-size:16.5px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -358,9 +358,15 @@ footer{background:var(--cream);border-top:2px solid var(--gold);padding:64px 0 0
 .socials a{width:42px;height:42px;border:1.5px solid var(--border2);border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:800;transition:all .3s}
 .socials a:hover{background:var(--gold);border-color:var(--gold);color:var(--brown);transform:translateY(-3px)}
 .ft-bottom{border-top:1px solid var(--border);padding:20px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:11.5px;letter-spacing:.14em;color:var(--ink3);font-weight:700;text-transform:uppercase}
-.fab-cta{position:fixed;right:16px;bottom:16px;z-index:1400;transform:translateY(150%);opacity:0;transition:transform .5s cubic-bezier(.19,1,.22,1),opacity .5s}
+.fab-cta{position:fixed;right:12px;bottom:14px;z-index:1400;max-width:calc(100vw - 24px);transform:translateY(150%);opacity:0;transition:transform .5s cubic-bezier(.19,1,.22,1),opacity .5s}
 .fab-cta.show{transform:none;opacity:1}
-.fab-cta .btn{box-shadow:0 16px 36px -10px rgba(30,122,70,.55)}
+.fab-cta .btn{box-shadow:0 16px 36px -10px rgba(30,122,70,.55);max-width:100%}
+@media(max-width:480px){
+  .fab-cta{right:12px}
+  .fab-cta .btn{padding:12px 18px;font-size:11.5px;letter-spacing:.06em;gap:8px}
+  .fab-social{left:10px;bottom:12px}
+  .fab-social a,#toTop{width:42px;height:42px;font-size:16px}
+}
 .fab-social{position:fixed;left:14px;bottom:16px;z-index:1400;display:flex;flex-direction:column;gap:10px}
 .fab-social a,#toTop{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:18px;font-weight:800;box-shadow:0 10px 26px -8px rgba(42,33,19,.45);transition:transform .3s}
 .fab-social a:hover,#toTop:hover{transform:translateY(-4px) scale(1.06)}

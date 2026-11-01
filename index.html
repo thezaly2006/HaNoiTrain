@@ -250,8 +250,6 @@ background:
 .board-footer a{color:var(--gold-l);font-weight:800;position:relative;transition:all .3s var(--ease-out)}
 .board-footer a:hover{color:#fff;text-shadow:0 0 8px rgba(201,162,53,.6)}
 
-.scrollcue{position:absolute;right:32px;bottom:30px;z-index:4;writing-mode:vertical-rl;font-size:10.5px;letter-spacing:.36em;color:rgba(255,254,249,.75);display:none;font-weight:700}
-@media(min-width:1024px){.scrollcue{display:block}}
 .ticker{position:relative;z-index:5;background:var(--gold);color:var(--brown);border-top:1.5px solid var(--gold-d)}
 .marquee{overflow:hidden;padding:12px 0}
 .mq-track{display:flex;width:max-content;animation:mq var(--dur,34s) linear infinite}
@@ -632,7 +630,7 @@ background:
   display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);
 }
 .cal-day-cell{
-  background:var(--white);min-height:120px;padding:10px 8px;
+  background:var(--white);min-height:140px;padding:10px 8px;
   display:flex;flex-direction:column;cursor:pointer;transition:all .25s ease;
   position:relative;
 }
@@ -645,18 +643,18 @@ background:
 }
 .cal-day-cell.other-month{opacity:.35;pointer-events:none;background:#f8f6f0}
 .cdc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.cdc-num{font-size:15px;font-weight:800;color:var(--ink)}
+.cdc-num{font-size:18px;font-weight:800;color:var(--ink)}
 .cal-day-cell.is-today .cdc-num{
   background:var(--maroon);color:#fff;border-radius:50%;width:26px;height:26px;
   display:grid;place-items:center;box-shadow:0 2px 6px rgba(142,31,47,.35);
 }
 .cdc-badge{
-  font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:4px;
+  font-size:11.5px;font-weight:700;padding:3px 7px;border-radius:4px;
   background:#fff0d6;color:#9c5900;border:1px solid #ffd58a;white-space:nowrap;
 }
 .cdc-shifts{display:flex;flex-direction:column;gap:5px;flex:1}
 .cdc-shift-tag{
-  font-size:11px;font-weight:700;padding:4px 6px;border-radius:5px;
+  font-size:15px;font-weight:700;padding:7px 9px;border-radius:6px;
   display:flex;align-items:center;justify-content:space-between;transition:all .2s ease;
 }
 .cdc-shift-tag:hover{transform:translateX(2px)}
@@ -669,7 +667,7 @@ background:
 
 /* TABLE VIEW */
 .cal-table-responsive{overflow-x:auto;padding:16px;background:var(--white)}
-.cal-matrix-table{width:100%;border-collapse:collapse;min-width:760px;font-size:13px}
+.cal-matrix-table{width:100%;border-collapse:collapse;min-width:760px;font-size:15px}
 .cal-matrix-table th{
   background:var(--cream2);color:var(--maroon);padding:12px 10px;
   text-align:center;font-weight:800;border:1px solid var(--border2);
@@ -682,7 +680,7 @@ background:
 .cmt-row-shift{background:var(--white)}
 .cmt-chay-badge{
   background:#e8f5e9;border:1.5px solid #43a047;color:#1b5e20;
-  font-weight:800;font-size:12px;padding:6px 12px;border-radius:6px;
+  font-weight:800;font-size:14px;padding:7px 14px;border-radius:6px;
   cursor:pointer;display:inline-block;transition:all .2s ease;
 }
 .cmt-chay-badge:hover{background:#2e7d32;color:#fff;transform:scale(1.08);box-shadow:0 4px 12px rgba(46,125,50,.35)}
@@ -715,8 +713,8 @@ background:
   .cal-actions{justify-content:space-between}
   .cal-days-grid{min-width:0}
   .cal-day-cell{min-height:92px;padding:6px 4px}
-  .cdc-num{font-size:13px}
-  .cdc-shift-tag{font-size:9.5px;padding:3px 4px}
+  .cdc-num{font-size:15px}
+  .cdc-shift-tag{font-size:11.5px;padding:4px 5px}
   .cdc-badge{display:none}
   .cal-selected-card{flex-direction:column;align-items:flex-start}
   .csc-actions{width:100%;flex-direction:column}
@@ -781,6 +779,19 @@ background:
   box-shadow:0 6px 18px -2px rgba(201,162,53,.5);z-index:3;
 }
 .toa-thumbs img{aspect-ratio:1;object-fit:cover;width:100%}
+/* Toa VIP vàng kim, đồng bộ với thẻ vé VIP */
+.toa-card.vip-gold{border:3px solid #FFD56B !important;box-shadow:0 14px 38px -10px rgba(201,162,53,.7),0 0 34px rgba(201,162,53,.5) !important}
+.toa-card.vip-gold:hover{border-color:#FFF0A8 !important;box-shadow:0 28px 60px -10px rgba(201,162,53,.85),0 0 50px rgba(255,213,107,.6) !important}
+.toa-card.vip-gold .toa-badge{background:linear-gradient(135deg,#C9A235,#FFE494,#B8860B) !important;color:#2A1805 !important;font-weight:900;box-shadow:0 4px 14px rgba(0,0,0,.45)}
+.toa-card.vip-gold:hover .toa-badge{box-shadow:0 6px 18px rgba(201,162,53,.6)}
+.toa-card.vip-gold .toa-info .cap{border:1.5px dashed #C9A235 !important;background:rgba(255,213,107,.28) !important}
+.toa-flag{
+  position:absolute;top:22px;right:-42px;z-index:5;pointer-events:none;
+  transform:rotate(38deg);padding:8px 50px;
+  background:linear-gradient(135deg,#C9A235,#FFE494,#B8860B);color:#2A1805;
+  font-size:11px;font-weight:900;letter-spacing:.16em;white-space:nowrap;
+  box-shadow:0 4px 14px rgba(0,0,0,.5);
+}
 .toa-num{position:absolute;right:22px;bottom:2px;font-size:clamp(4rem,9vw,6.5rem);font-weight:900;color:transparent;-webkit-text-stroke:1.5px var(--gold-l);pointer-events:none}
 
 /* ==========================================================================
@@ -985,7 +996,7 @@ background:
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 .btn-submit.loading .btn-spinner{display:inline-block}
-.btn-submit.loading .btn-text{opacity:.7}
+.btn-submit.btn-gold .btn-spinner{border-color:rgba(42,33,19,.25);border-top-color:#2A2113}
 .form-footer-note{
   font-size:13px;color:rgba(248,241,222,.7);margin-top:20px;
   text-align:center;font-style:italic;
@@ -1085,7 +1096,7 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
 .ft-brand .logo-img{height:58px;mix-blend-mode:normal;filter:brightness(0) invert(1);opacity:.95}
 .ft-brand .nm b{color:#fff}
 .ft-brand .nm small{color:var(--gold-l)}
-.ft-brand p{font-size:14px;max-width:36ch;margin-top:16px;font-style:italic}
+.ft-brand p{font-size:14px;max-width:55ch;margin-top:16px;font-style:italic;text-wrap:balance}
 .socials{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
 .socials a{
   width:42px;height:42px;border:1.5px solid rgba(233,216,160,.4);
@@ -1096,6 +1107,14 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
   background:var(--gold);border-color:var(--gold);color:var(--brown);
   box-shadow:0 0 14px rgba(201,162,53,.4);
 }
+.ft-legal{
+  margin-top:8px;padding:18px 22px;font-size:14.5px;line-height:1.8;color:rgba(248,241,222,.9);
+  background:rgba(233,216,160,.07);border:1px solid rgba(233,216,160,.35);
+  border-left:4px solid var(--gold);border-radius:10px;
+}
+.ft-legal b{color:var(--gold-l);font-weight:800}
+.ft-legal p:first-child b{font-size:16px;letter-spacing:.02em}
+.ft-legal + .ft-bottom{border-top:0;padding-top:18px}
 .ft-bottom{border-top:1px solid rgba(233,216,160,.25);padding:20px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:11.5px;letter-spacing:.14em;color:rgba(248,241,222,.55);font-weight:700;text-transform:uppercase}
 
 .fab-cta{position:fixed;right:16px;bottom:16px;z-index:1400;max-width:calc(100vw - 32px);transform:translateY(150%);opacity:0;transition:transform .5s cubic-bezier(.19,1,.22,1),opacity .5s}
@@ -1103,16 +1122,16 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
 .fab-cta .btn{box-shadow:0 16px 36px -10px rgba(30,122,70,.65);max-width:100%}
 @media(max-width:480px){
   .fab-cta .btn{padding:12px 18px;font-size:11.5px;letter-spacing:.06em;gap:8px}
-  .fab-social{left:10px;bottom:12px}
+  .fab-social{right:10px;bottom:70px}
   .fab-social a,#toTop{width:42px;height:42px;font-size:16px}
 }
-.fab-social{position:fixed;left:16px;bottom:16px;z-index:1400;display:flex;flex-direction:column;gap:10px}
+.fab-social{position:fixed;right:16px;bottom:78px;z-index:1400;display:flex;flex-direction:column;gap:10px}
 .fab-social a,#toTop{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:18px;font-weight:800;box-shadow:0 10px 26px -8px rgba(42,33,19,.45);transition:transform .35s var(--ease-spring)}
 .fab-social a:hover,#toTop:hover{transform:scale(1.06);box-shadow:0 4px 16px rgba(201,162,53,.4)}
 .fab-zalo{background:#0a64c8;font-size:12px}
-.fab-insta{background:linear-gradient(45deg,#f9ce34 0%,#ee2a7b 55%,#6228d7 100%)}
-.fab-tiktok{background:#010101}
-.fab-tiktok .tk{font-size:20px;font-weight:800;color:#fff;text-shadow:-2px 0 #25F4EE,2px 0 #FE2C55}
+.fab-call{background:#1E7A46}
+.fab-mess{background:linear-gradient(135deg,#00B2FF,#006AFF 55%,#A033FF)}
+.fab-wa{background:#25D366}
 #toTop{background:var(--gold);color:var(--brown);opacity:0;pointer-events:none;transition:opacity .4s,transform .35s var(--ease-spring)}
 #toTop.show{opacity:1;pointer-events:auto}
 
@@ -1772,7 +1791,6 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
     </div>
   </div>
 
-  <span class="scrollcue">CUỘN ĐỂ KHÁM PHÁ ↓</span>
   <div class="ticker" aria-hidden="true">
     <div class="marquee"><div class="mq-track" data-mq>
       <div>
@@ -2061,7 +2079,7 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
       <div class="toa-info">
         <h3>Ô Quan Chưởng</h3>
         <p class="toa-desc">Nơi ký ức Hà Nội còn vang vọng</p>
-        <span class="cap">👥 Tối đa 60 chỗ · 🕰 Nội thất giao thoa thời gian</span>
+        <span class="cap">👥 Tối đa 60 chỗ · 🕰 Nội thất giao thoa thời gian<br>🍵 Thức quà Hà Nội · 🎭 Biểu diễn trực tiếp</span>
         <ul><li>Sắc vàng rêu phong và những ô cửa xanh cổ kính gợi nhớ kiến trúc Đông Dương</li><li>Góc check-in với những biểu tượng về một Thủ Đô độc lập</li><li>Số lượng tầng 1 là 25 chỗ, tầng 2 là 30 chỗ, tầng xép là 10 chỗ. </li></ul>
         <div class="toa-thumbs">
           <button data-lb="toa" data-cap="Toa 02 · Sân khấu trong toa Ô Quan Chưởng"><img src="toa/o-quan-chuong-2.jpg" alt="" loading="lazy"></button>
@@ -2078,7 +2096,7 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
       <div class="toa-info">
         <h3>Ô Cầu Giấy</h3>
         <p class="toa-desc">Những mảnh ghép ký ức qua nhiều thời kỳ</p>
-        <span class="cap">👥 Tối đa tới 58 chỗ · 💺 Nội thất của thời hội nhập</span>
+        <span class="cap">👥 Tối đa tới 58 chỗ · 💺 Nội thất của thời hội nhập<br>🍵 Thức quà Hà Nội · 🎭 Biểu diễn trực tiếp</span>
         <ul><li>Thiết kế với nhiều hình ảnh Hà Nội thời kỳ chuyển mình, như Cầu Long Biên, <br>dáng vòm Ga Hà Nội,...</li><li>Góc check-in với xích lô, hoa tươi và khẩu hiệu hòa bình</li><li>Số lượng tầng 1 là 24 chỗ, tầng 2 là 24 chỗ, tầng xép là 10 chỗ. </li></ul>
         <div class="toa-thumbs">
           <button data-lb="toa" data-cap="Toa 03 · Không gian thoáng đãng, ghế ngồi tiêu chuẩn"><img src="toa/o-cau-giay-2.jpg" alt="" loading="lazy"></button>
@@ -2090,12 +2108,13 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
     </article>
 
     <!-- Toa 04: Ô Chợ Dừa (VIP) -->
-    <article class="toa-card rev" data-rv>
+    <article class="toa-card rev vip-gold" data-rv>
+      <span class="toa-flag">👑 ĐẶC QUYỀN VIP</span>
       <div class="toa-img" data-lb="toa" data-cap="Toa 04 · Ô Chợ Dừa — Toa VIP (Đặc quyền riêng tư, phục vụ tận bàn)"><img src="toa/o-cho-dua-1.jpg" alt="Toa Ô Chợ Dừa VIP" loading="lazy"><span class="toa-badge">TOA 04 · VIP</span><span class="toa-zoom-hint">🔍 Phóng to</span></div>
       <div class="toa-info">
         <h3>Ô Chợ Dừa - Toa VIP</h3>
         <p class="toa-desc">Nét thanh lịch giữa lòng Hà Nội</p>
-        <span class="cap">👥 Tối đa 44 chỗ · 🏙 Nội thất của thời hiện đại</span>
+        <span class="cap">👥 Tối đa 44 chỗ · 🏙 Nội thất của thời hiện đại<br>🍵 Thức quà Hà Nội · 🎭 Biểu diễn trực tiếp</span>
         <ul><li>Phòng khách thanh lịch giữa lòng thành phố với sofa êm ái, gam màu trang nhã và <br>cách bố trí giàu tính riêng tư</li><li>Khu vực tầng 1 có phòng riêng cho gia đình 04 / 10 người</li><li>Góc check in với Tiệm may gia truyền, Quán Hà Nội trà đá vỉa hè</li><li>Số lượng tầng 1 là 18 chỗ, tầng 2 là 16 chỗ, tầng xép là 10 chỗ</li></ul>
         <div class="toa-thumbs">
           <button data-lb="toa" data-cap="Toa 04 · Ghế sofa hạng VIP, không gian riêng tư"><img src="toa/o-cho-dua-2.jpg" alt="" loading="lazy"></button>
@@ -2112,7 +2131,7 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
       <div class="toa-info">
         <h3>Ô Đống Mác</h3>
         <p class="toa-desc">Khu tập thể cũ và những sắc màu dân gian</p>
-        <span class="cap">👥 Tối đa 56 chỗ · 🏺 Nội thất của di sản dân gian</span>
+        <span class="cap">👥 Tối đa 56 chỗ · 🏺 Nội thất của di sản dân gian<br>🍵 Thức quà Hà Nội · 🎭 Biểu diễn trực tiếp</span>
         <ul><li>Thiết kế kết nối đời sống với nghệ thuật dân tộc</li><li>Góc check in với quán Phở Hà Nội, tạp hóa xưa,...</li><li>Số lượng tầng 1 là 20 chỗ, tầng 2 là 24 chỗ, tầng xép là 12 chỗ</li></ul>
         <div class="toa-thumbs">
           <button data-lb="toa" data-cap="Toa 05 · Góc trưng bày tư liệu"><img src="toa/o-dong-mac-2.jpg" alt="" loading="lazy"></button>
@@ -2329,23 +2348,9 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
             <input type="number" id="bfQuantity" name="quantity" min="1" max="60" value="2" required>
           </div>
 
-          <!-- Ghi chú / Yêu cầu thêm -->
-          <div class="form-group full-width">
-            <label for="bfNote">Ghi chú hoặc yêu cầu đặc biệt</label>
-            <textarea id="bfNote" name="note" rows="3" placeholder="Nhập thêm mong muốn của quý khách nếu có..."></textarea>
-            <div class="form-note">
-              <b>📌 Lưu ý:</b> Cách thức này phù hợp với:
-              <ul>
-                <li>Người cao tuổi không tiện đặt trực tiếp qua cổng điện tử.</li>
-                <li>Đại diện đặt vé cho đoàn trên 10 người.</li>
-                <li>Đại diện hợp tác của công ty du lịch, lữ hành,...</li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn btn-green btn-submit" id="btnSubmitForm">
+          <button type="submit" class="btn btn-gold btn-submit" id="btnSubmitForm">
             <span class="btn-text">🚂 Gửi yêu cầu nhận tư vấn </span>
             <span class="btn-spinner" aria-hidden="true"></span>
           </button>
@@ -2505,14 +2510,10 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
     <div class="ft-grid">
       <div class="ft-brand">
         <a class="logo" href="#hero"><img class="logo-img" src="logo.png" alt="" onload="this.parentElement.classList.add('has-logo')" onerror="this.style.display='none'"><span class="seal">5</span><span class="nm"><b>THE HANOI TRAIN</b><small>5 CỬA Ô · EST. 2024</small></span></a>
-        <p>Một cuộc hẹn với Hà Nội và miền di sản Kinh Bắc — gần 4 tiếng trải nghiệm văn hóa trên đường ray.</p>
-        <div class="socials">
-          <a href="#" target="_blank" rel="noopener" aria-label="TikTok">Tk</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="Facebook">Fb</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">Ig</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="Threads">Th</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="YouTube">Yt</a>
-        </div>
+        <p>Chuyến tàu du lịch khứ hồi Hà Nội - Bắc Ninh. 
+        <br>Thưởng thức văn hóa - nghệ thuật - ẩm thực trên tàu 
+        <br>Tham quan di tích lịch sử Đền Đô - dâng hương 8 vị vua triều Lý
+        <br>Lắng nghe dân ca quan họ Bắc Ninh trên thuyền rồng, hồ bán nguyệt</p>
       </div>
       <div><h4>Liên hệ</h4><ul>
         <li>☎ <a href="tel:19001234">Hotline: 1900 1234</a></li>
@@ -2534,6 +2535,10 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
         <li><a href="#">Chính sách bảo mật</a></li>
       </ul></div>
     </div>
+    <div class="ft-legal">
+      <p>Được vận hành bởi: <b>Công ty Cổ phần Du lịch Dịch vụ Thương mại BHL</b></p>
+      <p>Chủ tịch: <b>Tào Đức Hiệp</b></p>
+    </div>
     <div class="ft-bottom">
       <span>© <span id="year">2026</span> The Hanoi Train · Tàu Hà Nội 5 Cửa Ô</span>
       <span>Thiết kế tại Hà Nội 🚂</span>
@@ -2545,15 +2550,23 @@ footer{background:rgba(16,8,4,.88);border-top:2px solid var(--gold);padding:64px
      // NÚT NỔI ĐẶT VÉ (FAB) & MẠNG XÃ HỘI
      ========================================================================== -->
 <div class="fab-cta" id="fabCta">
-  <!-- // [LINK ĐẶT VÉ MỚI] Cập nhật link affiliate chính xác -->
-  <a class="btn btn-green sm js-book" href="https://booking.hanoitrain.vn/?refCode=quayve5cuao" target="_blank" rel="noopener">🚂 Đặt vé ngay</a>
+  <a class="btn btn-green sm" href="#form-dat-ve">📝 Điền form thông tin</a>
+</div>
 </div>
 <div class="fab-social">
-  <a class="fab-zalo" href="https://zalo.me/5cuaohanoi" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
-  <a class="fab-insta" href="https://instagram.com/hanoitrain" target="_blank" rel="noopener" aria-label="Instagram">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.3" fill="#fff" stroke="none"/></svg>
+  <div class="fab-social">
+  <a class="fab-call" href="tel:19001234" aria-label="Gọi hotline">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg>
   </a>
-  <a class="fab-tiktok" href="https://tiktok.com/@hanoitrain" target="_blank" rel="noopener" aria-label="TikTok"><span class="tk">♪</span></a>
+  <a class="fab-zalo" href="https://zalo.me/5cuaohanoi" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
+  <a class="fab-mess" href="https://m.me/TEN_FANPAGE" target="_blank" rel="noopener" aria-label="Chat Messenger">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 6.2 2 11.5c0 2.9 1.3 5.5 3.5 7.2V22l3.2-1.8c1 .3 2.1.4 3.3.4 5.5 0 10-4.2 10-9.5S17.5 2 12 2zm1 12.8l-2.5-2.7-4.9 2.7 5.4-5.8 2.6 2.7 4.8-2.7-5.4 5.8z"/></svg>
+  </a>
+  <a class="fab-wa" href="https://wa.me/84XXXXXXXXX" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3a9 9 0 00-7.7 13.6L3 21l4.5-1.2A9 9 0 1012 3z"/><path fill="#fff" stroke="none" d="M9.2 7.8c.3 0 .5 0 .7.5l.7 1.6c.1.2 0 .4-.1.6l-.5.6c.8 1.5 1.9 2.5 3.4 3.2l.6-.7c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.2.3.4 0 .7-.6 1.7-1.5 1.9-.8.2-2.100-.1-3.500-1-1.300-.8-2.400-2-3-3.200-.5-1-.7-2.100-.2-2.900.2-.4.5-.7.9-.7z"/></svg>
+  </a>
+  <button id="toTop" aria-label="Lên đầu trang">↑</button>
+</div>
   <button id="toTop" aria-label="Lên đầu trang">↑</button>
 </div>
 

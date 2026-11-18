@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Quản trị tin tức – Tàu Hà Nội 5 Cửa Ô</title>
+<link rel="icon" href="favicon/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFEF9; --cream:#F8F1DE; --ink:#2A2113; --ink2:#5C5138; --ink3:#8A7D5F;
+  --gold:#C9A235; --gold-d:#8F6F1E; --border:#E4D3A5;
+  --maroon:#8E1F2F; --maroon-d:#6E1522; --green:#1E7A46; --red:#B3261E;
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"Be Vietnam Pro",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.55}
+button{font-family:inherit;cursor:pointer}
+.top{background:var(--maroon-d);color:#fff;padding:14px 0;border-bottom:3px solid var(--gold)}
+.wrap{width:min(1180px,94%);margin:0 auto}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.top h1{margin:0;font-family:var(--serif);font-size:1.3rem}
+.top a{color:#E9D8A0;font-weight:600;text-decoration:none;font-size:14px}
+.top a:hover{text-decoration:underline}
+.banner{background:#FFF3CD;border:1px solid #E6C86A;color:#6B4E00;border-radius:10px;padding:12px 16px;margin:18px 0 0;font-size:14px}
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:22px;margin:20px 0;box-shadow:0 10px 28px -18px rgba(96,74,20,.4)}
+h2{font-family:var(--serif);color:var(--maroon);margin:0 0 14px;font-size:1.3rem}
+label{display:block;font-weight:700;font-size:13px;margin:14px 0 6px;color:var(--ink2)}
+label small{font-weight:500;color:var(--ink3)}
+input,textarea,select{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,53,.22)}
+textarea{min-height:90px;resize:vertical}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.chk{display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:16px}
+.chk input{width:auto}
+.b-pin{background:#FBE8B8;color:#7A5A00}
+@media(max-width:900px){.row{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+.btn{border:0;border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px;transition:transform .2s,box-shadow .2s,opacity .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-main{background:var(--maroon);color:#fff;box-shadow:0 8px 18px -8px rgba(142,31,47,.6)}
+.btn-ghost{background:transparent;color:var(--maroon);border:1.5px solid var(--maroon)}
+.btn-sm{padding:6px 14px;font-size:12.5px}
+.btn-del{background:transparent;color:var(--red);border:1.5px solid var(--red)}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.preview{margin-top:10px;width:220px;aspect-ratio:16/10;border-radius:10px;border:1.5px dashed var(--border);background:#fff center/cover no-repeat;display:grid;place-items:center;color:var(--ink3);font-size:12px}
+.err{color:var(--red);font-size:13px;margin-top:8px;min-height:1em}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+td.t{font-weight:600;min-width:200px}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.b-pub{background:#DDF3E5;color:var(--green)}
+.b-draft{background:#EEE;color:#666}
+.empty{text-align:center;color:var(--ink3);padding:26px 0}
+.tbl{overflow-x:auto}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.3s;z-index:9}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#login{max-width:420px;margin:70px auto}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <h1>🚂 Quản trị tin tức</h1>
+  <span><a href="index.html#tin-tuc" target="_blank" rel="noopener">Xem trang web ↗</a>
+  <a href="#" id="logout" hidden style="margin-left:16px">Đăng xuất</a></span>
+</div></div>
+
+<!-- ĐĂNG NHẬP -->
+<div class="wrap" id="login" hidden>
+  <form class="card" id="loginForm">
+    <h2>Đăng nhập quản trị</h2>
+    <label for="pw">Mật khẩu</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <div class="err" id="loginErr"></div>
+    <div class="actions"><button class="btn btn-main" type="submit">Đăng nhập</button></div>
+  </form>
+</div>
+
+<!-- TRANG QUẢN TRỊ -->
+<main class="wrap" id="app" hidden>
+  <div class="banner" id="demoBanner" hidden>
+    ⚠️ <b>Chế độ DEMO:</b> chưa kết nối Google Sheet nên tin chỉ được lưu <b>trong trình duyệt này</b> (mở trang chủ cùng trình duyệt để xem thử). Muốn lưu thật, dán link Apps Script vào file <b>news-config.js</b>.
+    <button class="btn btn-ghost btn-sm" id="resetDemo" style="margin-left:8px">Xóa dữ liệu demo</button>
+  </div>
+
+  <section class="card">
+    <h2 id="formTitle">Thêm bài viết mới</h2>
+    <form id="f" novalidate>
+      <input type="hidden" id="fId">
+      <label for="fTitle">Tiêu đề *</label>
+      <input id="fTitle" maxlength="200">
+      <label for="fSummary">Mô tả ngắn * <small>(hiện dưới tiêu đề, tối đa 600 ký tự)</small></label>
+      <textarea id="fSummary" maxlength="600"></textarea>
+      <label for="fContent">Nội dung bài viết <small>(dòng trống = đoạn mới; ## Tiêu đề; **chữ đậm**; ![chú thích](link ảnh))</small></label>
+      <textarea id="fContent" style="min-height:340px"></textarea>
+      <label for="fImage">Link ảnh <small>(dán link ảnh, hoặc đường dẫn trong thư mục web, ví dụ news/anh-1.jpg)</small></label>
+      <input id="fImage" placeholder="https://...">
+      <div class="preview" id="prev">Chưa có ảnh</div>
+      <label for="fLink">Link bài viết đầy đủ <small>(không bắt buộc – có link thì tiêu đề và ảnh bấm được)</small></label>
+      <input id="fLink" placeholder="https://...">
+      <div class="row">
+        <div><label for="fCat">Chuyên mục <small>(ví dụ: Cẩm nang đi tàu)</small></label><input id="fCat" maxlength="40"></div>
+        <div><label for="fAuthor">Tác giả <small>(không bắt buộc)</small></label><input id="fAuthor" maxlength="60"></div>
+        <div><label for="fDate">Ngày đăng</label><input id="fDate" type="date"></div>
+        <div><label for="fStatus">Trạng thái</label>
+          <select id="fStatus"><option value="published">Đăng lên web</option><option value="draft">Bản nháp (ẩn)</option></select></div>
+      </div>
+      <label class="chk"><input type="checkbox" id="fPinned"> 📌 <b>Ghim lên trang chủ</b> <small>(chỉ bài được ghim mới hiện ở mục Tin tức)</small></label>
+      <div class="err" id="fErr"></div>
+      <div class="actions">
+        <button class="btn btn-main" type="submit" id="btnSave">Lưu bài viết</button>
+        <button class="btn btn-ghost" type="button" id="btnNew">Làm mới form</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Danh sách bài viết <small id="count" style="font-family:var(--sans);font-size:13px;color:var(--ink3)"></small></h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Ngày</th><th>Tiêu đề</th><th>Chuyên mục</th><th>Trạng thái</th><th>Ghim</th><th></th></tr></thead>
+        <tbody id="list"><tr><td colspan="6" class="empty">Đang tải…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<div id="toast" role="status"></div>
+
+<script src="news-config.js"></script>
+<script src="news.js"></script>
+<script>
+(function () {
+  var N = window.HNNews, pw = '', items = [];
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = 'hn_admin_pw';
+
+  function toast(m) {
+    var t = $('toast'); t.textContent = m; t.classList.add('show');
+    clearTimeout(toast.t); toast.t = setTimeout(function () { t.classList.remove('show'); }, 3200);
+  }
+  function store(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {} }
+  function stored() { try { return sessionStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
+  function today() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+
+  // ---- Vào trang quản trị ----
+  function enter() {
+    $('login').hidden = true; $('app').hidden = false;
+    $('logout').hidden = N.hasApi ? false : true;
+    $('demoBanner').hidden = N.hasApi;
+    resetForm(); refresh();
+  }
+  function showLogin(msg) {
+    $('app').hidden = true; $('login').hidden = false; $('logout').hidden = true;
+    $('loginErr').textContent = msg || '';
+  }
+  if (!N.hasApi) { enter(); }
+  else {
+    var p = stored();
+    if (p) N.auth(p).then(function (ok) { if (ok) { pw = p; enter(); } else { store(''); showLogin(); } }, function () { showLogin(); });
+    else showLogin();
+  }
+  $('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('pw').value;
+    $('loginErr').textContent = 'Đang kiểm tra…';
+    N.auth(v).then(function (ok) {
+      if (ok) { pw = v; store(v); enter(); } else $('loginErr').textContent = 'Sai mật khẩu.';
+    }, function () { $('loginErr').textContent = 'Không kết nối được máy chủ. Kiểm tra lại link Apps Script.'; });
+  });
+  $('logout').addEventListener('click', function (e) { e.preventDefault(); pw = ''; store(''); $('pw').value = ''; showLogin(); });
+  $('resetDemo').addEventListener('click', function () {
+    if (confirm('Xóa dữ liệu demo và quay về tin mẫu ban đầu?')) { N.resetDemo(); refresh(); resetForm(); }
+  });
+
+  // ---- Danh sách ----
+  function refresh() {
+    N.listAll(pw).then(function (list) { items = list; render(); }, function () {
+      $('list').innerHTML = '<tr><td colspan="6" class="empty">Không tải được danh sách. Thử tải lại trang.</td></tr>';
+    });
+  }
+  function render() {
+    $('count').textContent = '(' + items.length + ' bài)';
+    if (!items.length) { $('list').innerHTML = '<tr><td colspan="6" class="empty">Chưa có bài viết nào.</td></tr>'; return; }
+    $('list').innerHTML = items.map(function (it) {
+      var pub = it.status !== 'draft';
+      return '<tr data-id="' + N.esc(it.id) + '">' +
+        '<td>' + N.esc(N.fmtDate(it.date)) + '</td>' +
+        '<td class="t">' + N.esc(it.title) + '</td>' +
+        '<td>' + N.esc(it.category) + '</td>' +
+        '<td><span class="badge ' + (pub ? 'b-pub' : 'b-draft') + '">' + (pub ? 'Đang đăng' : 'Bản nháp') + '</span></td>' +
+        '<td>' + (it.pinned ? '<span class="badge b-pin">📌 Đã ghim</span>' : '<span style="color:var(--ink3)">—</span>') + '</td>' +
+        '<td><div class="tools">' +
+          '<button class="btn btn-ghost btn-sm" data-a="edit">Sửa</button>' +
+          '<button class="btn btn-ghost btn-sm" data-a="pin">' + (it.pinned ? 'Bỏ ghim' : 'Ghim') + '</button>' +
+          '<button class="btn btn-ghost btn-sm" data-a="toggle">' + (pub ? 'Ẩn' : 'Đăng') + '</button>' +
+          '<button class="btn btn-del btn-sm" data-a="del">Xóa</button>' +
+        '</div></td></tr>';
+    }).join('');
+  }
+  $('list').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-a]'); if (!b) return;
+    var id = b.closest('tr').dataset.id;
+    var it = items.filter(function (x) { return x.id === id; })[0]; if (!it) return;
+    var a = b.dataset.a;
+    if (a === 'edit') { fill(it); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    if (a === 'pin') {
+      var p2 = Object.assign({}, it, { pinned: !it.pinned });
+      N.save(p2, pw).then(function () { toast(p2.pinned ? 'Đã ghim lên trang chủ' : 'Đã bỏ ghim'); refresh(); }, fail);
+    }
+    if (a === 'toggle') {
+      var c = Object.assign({}, it, { status: it.status === 'draft' ? 'published' : 'draft' });
+      N.save(c, pw).then(function () { toast(c.status === 'draft' ? 'Đã ẩn bài viết' : 'Đã đăng bài viết'); refresh(); }, fail);
+    }
+    if (a === 'del') {
+      if (!confirm('Xóa bài "' + it.title + '"? Không thể khôi phục.')) return;
+      N.remove(id, pw).then(function () { toast('Đã xóa bài viết'); if ($('fId').value === id) resetForm(); refresh(); }, fail);
+    }
+  });
+  function fail(err) {
+    if (err && err.message === 'auth') { store(''); showLogin('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại.'); return; }
+    toast('Có lỗi xảy ra, vui lòng thử lại.');
+  }
+
+  // ---- Form ----
+  function preview() {
+    var u = N.safeUrl($('fImage').value), p = $('prev');
+    if (!u) { p.style.backgroundImage = ''; p.textContent = 'Chưa có ảnh'; return; }
+    p.textContent = '';
+    p.style.backgroundImage = 'url("' + u.replace(/"/g, '%22') + '")';
+  }
+  function fill(it) {
+    $('formTitle').textContent = 'Sửa bài viết';
+    $('fId').value = it.id; $('fTitle').value = it.title; $('fSummary').value = it.summary;
+    $('fImage').value = it.image; $('fLink').value = it.link; $('fCat').value = it.category; $('fAuthor').value = it.author || ''; $('fPinned').checked = !!it.pinned;
+    $('fDate').value = it.date; $('fStatus').value = it.status === 'draft' ? 'draft' : 'published';
+    $('fContent').value = it.content || '';
+    $('fErr').textContent = ''; preview();
+  }
+  function resetForm() {
+    $('formTitle').textContent = 'Thêm bài viết mới';
+    $('f').reset(); $('fId').value = ''; $('fDate').value = today(); $('fErr').textContent = ''; preview();
+  }
+  $('fImage').addEventListener('input', preview);
+  $('btnNew').addEventListener('click', resetForm);
+
+  function badUrl(v) { return v.trim() && !N.safeUrl(v); }
+  $('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var it = {
+      id: $('fId').value, title: $('fTitle').value, summary: $('fSummary').value,
+      content: $('fContent').value,
+      image: $('fImage').value, link: $('fLink').value, category: $('fCat').value,
+      author: $('fAuthor').value, pinned: $('fPinned').checked,
+      date: $('fDate').value || today(), status: $('fStatus').value
+    };
+    var err = '';
+    if (!it.title.trim()) err = 'Vui lòng nhập tiêu đề.';
+    else if (!it.summary.trim()) err = 'Vui lòng nhập mô tả ngắn.';
+    else if (badUrl(it.image) || badUrl(it.link)) err = 'Link ảnh / link bài viết phải bắt đầu bằng https:// (hoặc là đường dẫn trong thư mục web).';
+    $('fErr').textContent = err; if (err) return;
+    var btn = $('btnSave'); btn.disabled = true; btn.textContent = 'Đang lưu…';
+    N.save(it, pw).then(function () {
+      toast(it.id ? 'Đã cập nhật bài viết' : 'Đã thêm bài viết'); resetForm(); refresh();
+    }, fail).then(function () { btn.disabled = false; btn.textContent = 'Lưu bài viết'; });
+  });
+})();
+</script>
+</body>
+</html>

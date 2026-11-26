@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<script>if(!/bai-viet\.html$/i.test(location.pathname))document.write('<base href="/">');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tin tức — Tàu Hà Nội 5 Cửa Ô | The Hanoi Train</title>
+<meta name="description" content="Tin tức Hà Nội 5 Cửa Ô: cập nhật lịch chạy, giá vé, kinh nghiệm đi tàu, sự kiện và hướng dẫn đặt vé mới nhất.">
+<link rel="icon" href="favicon/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png">
+<link rel="apple-touch-icon" href="favicon/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --white:#FFFEF9; --cream:#F8F1DE; --cream2:#F1E6C8;
+  --ink:#2A2113; --ink2:#5C5138; --ink3:#8A7D5F;
+  --gold:#C9A235; --gold-d:#8F6F1E; --gold-l:#E9D8A0;
+  --maroon:#8E1F2F; --maroon-d:#6E1522;
+  --border:#E4D3A5; --border2:#D6C088;
+  --green:#1E7A46; --green-d:#145C33; --brown:#3A2C12;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --sans:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --rad:14px; --hh:96px;
+  --sh:0 14px 34px -16px rgba(96,74,20,.35);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.7;font-size:16px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+::selection{background:var(--maroon);color:#fff}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1360px,93%);margin:0 auto}
+
+/* ===== BUTTON ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;padding:16px 32px;border-radius:999px;border:2px solid transparent;white-space:nowrap;transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),background .3s}
+.btn-green{background:var(--green);color:#fff;box-shadow:0 10px 26px -8px rgba(30,122,70,.65)}
+.btn-green:hover{background:var(--green-d);transform:translate3d(0,-3px,0)}
+.btn.sm{padding:12px 24px;font-size:12.5px}
+
+/* ===== HEADER (giống trang chủ) ===== */
+#header{position:fixed;top:0;left:0;right:0;z-index:1500;background:rgba(255,254,249,.96);backdrop-filter:blur(10px);border-bottom:1.5px solid var(--border);transition:box-shadow .3s}
+#header.scrolled{box-shadow:0 10px 30px -14px rgba(96,74,20,.35)}
+#header .bar{display:flex;align-items:center;gap:20px;height:var(--hh)}
+.logo{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.logo-img{height:76px;width:auto;mix-blend-mode:multiply}
+.logo.has-logo .seal,.logo.has-logo .nm{display:none}
+.logo .seal{width:44px;height:44px;border:2px solid var(--maroon);border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:20px;color:var(--maroon);flex-shrink:0}
+.logo .nm{line-height:1.12}
+.logo .nm b{font-family:var(--serif);font-size:15px;font-weight:800;letter-spacing:.06em;display:block;color:var(--maroon)}
+.logo .nm small{font-size:9.5px;letter-spacing:.3em;color:var(--gold-d);text-transform:uppercase;font-weight:700}
+#nav{display:none;flex:1;justify-content:center;gap:6px}
+#nav a{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 18px;border-radius:999px;position:relative;color:var(--ink);transition:all .3s var(--ease-out)}
+#nav a::before{content:"";position:absolute;inset:0;background:rgba(201,162,53,.14);border-radius:999px;transform:scale(.85);opacity:0;transition:all .3s var(--ease-out);pointer-events:none}
+#nav a::after{content:"";position:absolute;left:18px;right:18px;bottom:4px;height:2.5px;background:var(--maroon);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-out)}
+#nav a:hover::before,#nav a.active::before{transform:scale(1);opacity:1}
+#nav a:hover::after,#nav a.active::after{transform:scaleX(1)}
+#nav a:hover,#nav a.active{color:var(--maroon)}
+.hd-cta{margin-left:auto;display:flex;align-items:center;gap:12px}
+#burger{display:grid;place-items:center;width:44px;height:44px;border:1.5px solid var(--border2);border-radius:50%}
+#burger span{display:block;width:18px;height:2px;background:var(--ink);position:relative}
+#burger span::before,#burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--ink)}
+#burger span::before{top:-6px}#burger span::after{top:6px}
+@media(min-width:1020px){#nav{display:flex}#burger{display:none}}
+@media(max-width:560px){.hd-cta .btn{display:none}}
+#mmenu{position:fixed;inset:0;z-index:1600;background:var(--white);color:var(--ink);display:flex;flex-direction:column;padding:22px 6%;transform:translateY(-102%);transition:transform .55s cubic-bezier(.19,1,.22,1)}
+#mmenu.open{transform:none}
+#mmenu .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5vh}
+#mclose{width:46px;height:46px;border:1.5px solid var(--border2);border-radius:50%;font-size:20px}
+#mmenu nav{display:flex;flex-direction:column}
+#mmenu nav a{font-family:var(--serif);font-size:clamp(1.6rem,6vw,2.3rem);font-weight:800;padding:14px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+#mmenu nav a small{font-family:var(--sans);font-size:12px;color:var(--maroon);letter-spacing:.2em}
+#mmenu nav a.active{color:var(--maroon)}
+#mmenu .btn{margin-top:auto}
+
+/* ===== TRANG TIN TỨC ===== */
+.np{padding:calc(var(--hh) + 36px) 0 80px;background:radial-gradient(1000px 460px at 92% -8%,rgba(201,162,53,.18),transparent 60%),var(--cream);min-height:100vh}
+.np-grid{display:grid;gap:28px;align-items:start}
+@media(min-width:1000px){.np-grid{grid-template-columns:minmax(0,1fr) 360px}}
+.np-box{background:var(--white);border:1.5px solid var(--border);border-radius:var(--rad);box-shadow:var(--sh)}
+.np-head{padding:34px 40px 30px}
+.np-head h1{font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.6rem);font-weight:800;line-height:1.2;color:var(--maroon);margin-bottom:14px}
+.np-head p{color:var(--ink);max-width:70ch}
+.np-crumb{font-size:13px;color:var(--ink3);margin-bottom:10px}
+.np-crumb a{color:var(--maroon);font-weight:600}.np-crumb a:hover{text-decoration:underline}
+.np-list{display:grid;gap:26px;margin-top:26px}
+.news-card{position:relative;background:var(--white);border:1.5px solid var(--border);border-radius:var(--rad);box-shadow:var(--sh);padding:30px 38px 24px;opacity:0;transform:translate3d(0,16px,0);animation:cardIn .6s var(--ease-out) forwards;animation-delay:calc(var(--i,0)*.05s)}
+@keyframes cardIn{to{opacity:1;transform:none}}
+.news-title{font-family:var(--serif);font-size:clamp(1.2rem,2.4vw,1.55rem);line-height:1.35;font-weight:800;color:var(--maroon);margin-bottom:8px}
+.news-title a:hover{text-decoration:underline}
+.news-title a::after{content:"";position:absolute;inset:0;z-index:1}
+.news-meta{font-size:13.5px;color:var(--ink3);margin-bottom:18px}
+.news-meta i{font-style:normal;margin:0 4px}
+.news-imglink{display:block}
+.news-img{display:block;aspect-ratio:2/1;overflow:hidden;border-radius:6px;margin-bottom:20px;background:linear-gradient(135deg,var(--maroon-d),var(--maroon) 55%,var(--gold-d))}
+.news-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
+.news-imglink:hover .news-img img{transform:scale(1.03)}
+.news-sum{font-size:16px;line-height:1.75;color:var(--ink);text-align:justify}
+.news-more{color:var(--maroon);font-weight:600}.news-more:hover{text-decoration:underline}
+.news-foot{margin-top:16px;font-size:14px;color:var(--ink3)}
+.np-info{font-size:13.5px;color:var(--ink3);margin:22px 4px 0}
+.np-empty{text-align:center;color:var(--ink3);padding:50px 20px}
+
+/* Phân trang */
+.pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:34px}
+.pager a,.pager span{min-width:44px;height:44px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;border:1.5px solid var(--border2);border-radius:10px;background:var(--white);font-weight:700;font-size:15px;color:var(--ink);transition:all .25s var(--ease-out)}
+.pager a:hover{border-color:var(--maroon);color:var(--maroon);transform:translateY(-2px)}
+.pager .cur{background:var(--maroon);border-color:var(--maroon);color:#fff}
+.pager .gap{border-color:transparent;background:transparent;min-width:24px;padding:0}
+.pager .off{opacity:.4;pointer-events:none}
+
+/* Sidebar */
+.np-side{display:grid;gap:22px}
+@media(min-width:1000px){.np-side{position:sticky;top:calc(var(--hh) + 20px)}}
+.np-search{display:flex;padding:34px 30px}
+.np-search input{flex:1;min-width:0;height:46px;border:1.5px solid var(--border);border-right:0;border-radius:4px 0 0 4px;background:#F4F7FB;padding:0 16px;font:inherit;font-size:15px;color:var(--ink)}
+.np-search input:focus{outline:none;border-color:var(--maroon)}
+.np-search button{width:56px;height:46px;background:var(--maroon);color:#fff;border-radius:0 4px 4px 0;display:grid;place-items:center;transition:background .25s}
+.np-search button:hover{background:var(--maroon-d)}
+.np-recent{padding:34px 34px 20px}
+.np-recent h2{font-family:var(--sans);font-size:1.35rem;font-weight:500;color:var(--ink);margin-bottom:18px}
+.np-recent ul{list-style:none}
+.np-recent li{padding:14px 0;border-bottom:1px solid var(--border);font-size:15px;line-height:1.6}
+.np-recent li:last-child{border-bottom:0}
+.np-recent a:hover{color:var(--maroon)}
+
+@media(max-width:600px){.news-card{padding:22px 18px 18px}.np-head{padding:26px 20px 22px}.np-recent{padding:26px 22px 12px}.np-search{padding:22px}}
+@media(prefers-reduced-motion:reduce){.news-card{animation:none;opacity:1;transform:none}}
+
+/* ===== FOOTER ===== */
+footer{background:rgba(16,8,4,.96);border-top:2px solid var(--gold);padding:64px 0 0;color:var(--cream)}
+.ft-grid{display:grid;gap:38px;padding-bottom:46px}
+@media(min-width:800px){.ft-grid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+.ft-grid h4{font-size:11.5px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-l);margin-bottom:18px}
+.ft-grid ul{list-style:none;display:grid;gap:10px;font-size:14.5px}
+.ft-grid a:hover{color:var(--gold-l)}
+.ft-brand .logo-img{height:58px;mix-blend-mode:normal;filter:brightness(0) invert(1);opacity:.95}
+.ft-brand .nm b{color:#fff}.ft-brand .nm small{color:var(--gold-l)}
+.ft-brand p{font-size:14px;max-width:55ch;margin-top:16px;font-style:italic}
+.ft-legal{margin-top:8px;padding:18px 22px;font-size:14.5px;line-height:1.8;color:rgba(248,241,222,.9);background:rgba(233,216,160,.07);border:1px solid rgba(233,216,160,.35);border-left:4px solid var(--gold);border-radius:10px}
+.ft-legal b{color:var(--gold-l);font-weight:800}
+.ft-bottom{padding:18px 0 20px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:11.5px;letter-spacing:.14em;color:rgba(248,241,222,.55);font-weight:700;text-transform:uppercase}
+
+/* ===== NÚT NỔI ===== */
+.fab-social{position:fixed;right:16px;bottom:16px;z-index:1400;display:flex;flex-direction:column;gap:10px}
+.fab-social a,#toTop{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:18px;font-weight:800;box-shadow:0 10px 26px -8px rgba(42,33,19,.45);transition:transform .35s var(--ease-spring)}
+.fab-social a:hover,#toTop:hover{transform:scale(1.08)}
+.fab-zalo{background:#0a64c8;font-size:12px}
+.fab-call{background:var(--green)}
+#toTop{background:var(--maroon);opacity:0;pointer-events:none;transition:opacity .3s,transform .35s var(--ease-spring)}
+#toTop.show{opacity:1;pointer-events:auto}
+
+/* ===== BÀI VIẾT CHI TIẾT ===== */
+.post{padding:34px 40px 38px}
+.post-title{font-family:var(--serif);font-size:clamp(1.7rem,3.6vw,2.4rem);line-height:1.25;font-weight:800;color:var(--maroon);margin-bottom:10px}
+.post .news-meta{margin-bottom:22px}
+.post-hero{margin:0 0 28px}.post-hero img{width:100%;height:auto;border-radius:6px}
+.post-body{font-size:17px;line-height:1.85}
+.post-body p{margin:0 0 1.1em}
+.post-body h2{font-family:var(--serif);font-size:1.5rem;color:var(--maroon);margin:1.6em 0 .6em;line-height:1.3}
+.post-body h3{font-family:var(--serif);font-size:1.2rem;color:var(--maroon);margin:1.4em 0 .5em}
+.post-body figure{margin:1.4em 0}.post-body figure img{width:100%;height:auto;border-radius:6px}
+.post-body figcaption{font-size:13.5px;color:var(--ink3);text-align:center;margin-top:8px}
+.post-body ul,.post-body ol{margin:0 0 1.1em;padding-left:1.5em}
+.post-body li{margin:.25em 0}
+.post-body blockquote{margin:1.2em 0;padding:.6em 1.1em;border-left:4px solid var(--gold);background:var(--cream);color:var(--ink2);border-radius:0 6px 6px 0}
+.post-body blockquote p{margin:0}
+.post-body a{color:var(--maroon);text-decoration:underline;text-underline-offset:2px}
+.post-body .ta-center{text-align:center}.post-body .ta-right{text-align:right}.post-body .ta-justify{text-align:justify}
+.post-body .fs1{font-size:.7em}.post-body .fs2{font-size:.85em}.post-body .fs4{font-size:1.2em}.post-body .fs5{font-size:1.45em}.post-body .fs6{font-size:1.8em}.post-body .fs7{font-size:2.2em}
+.post-nav{display:grid;gap:14px;margin-top:22px}
+@media(min-width:700px){.post-nav{grid-template-columns:1fr 1fr}}
+.post-nav a{display:block;padding:16px 20px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--rad);font-weight:600;color:var(--maroon);line-height:1.5;transition:all .25s var(--ease-out)}
+.post-nav a:hover{border-color:var(--maroon);transform:translateY(-2px)}
+.post-nav small{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:700}
+.post-nav .next{text-align:right}
+.post-back{text-align:center;margin-top:22px}
+@media(max-width:600px){.post{padding:24px 18px 26px}.post-body{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap bar">
+    <a class="logo" href="index.html" aria-label="The Hanoi Train — Tàu Hà Nội 5 Cửa Ô">
+      <img class="logo-img" src="logo.png" alt="The Hanoi Train" onload="this.parentElement.classList.add('has-logo')" onerror="this.style.display='none'">
+      <span class="seal">5</span>
+      <span class="nm"><b>THE HANOI TRAIN</b><small>5 CỬA Ô · EST. 2024</small></span>
+    </a>
+    <nav id="nav" aria-label="Điều hướng chính">
+      <a href="index.html#hanh-trinh">Hành trình</a>
+      <a href="index.html#lich">Lịch chạy</a>
+      <a href="index.html#toa">Các toa tàu</a>
+      <a href="index.html#gia-ve">Giá vé</a>
+      <a href="index.html#dich-vu">Dịch vụ</a>
+      <a href="tin-tuc.html" class="active" aria-current="page">Tin tức</a>
+    </nav>
+    <div class="hd-cta">
+      <a class="btn btn-green sm" href="https://booking.hanoitrain.vn/?refCode=quayve5cuao" target="_blank" rel="noopener">🟢 Đặt vé ngay</a>
+      <button id="burger" aria-label="Mở menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div id="mmenu" aria-hidden="true">
+  <div class="top">
+    <a class="logo" href="index.html"><img class="logo-img" src="logo.png" alt="" style="height:44px" onload="this.parentElement.classList.add('has-logo')" onerror="this.style.display='none'"><span class="seal">5</span><span class="nm"><b>THE HANOI TRAIN</b><small>5 CỬA Ô · EST. 2024</small></span></a>
+    <button id="mclose" aria-label="Đóng menu">✕</button>
+  </div>
+  <nav>
+    <a href="index.html#hanh-trinh"><span>Hành trình</span><small>01</small></a>
+    <a href="index.html#lich"><span>Lịch chạy</span><small>02</small></a>
+    <a href="index.html#toa"><span>Các toa tàu</span><small>03</small></a>
+    <a href="index.html#gia-ve"><span>Giá vé</span><small>04</small></a>
+    <a href="index.html#dich-vu"><span>Dịch vụ</span><small>05</small></a>
+    <a href="tin-tuc.html" class="active"><span>Tin tức</span><small>06</small></a>
+  </nav>
+  <a class="btn btn-green" href="https://booking.hanoitrain.vn/?refCode=quayve5cuao" target="_blank" rel="noopener">🟢 Đặt vé ngay</a>
+</div>
+
+<main class="np">
+  <div class="wrap np-grid">
+    <div class="np-main">
+      <article class="np-box post" id="post"><p class="np-empty">Đang tải bài viết…</p></article>
+      <nav class="post-nav" id="postNav" aria-label="Bài trước và bài sau"></nav>
+      <p class="post-back"><a class="btn btn-green sm" href="tin-tuc.html">← Tất cả tin tức</a></p>
+    </div>
+    <aside class="np-side">
+      <form class="np-box np-search" action="tin-tuc.html" method="get" role="search">
+        <input type="search" name="q" placeholder="Tìm kiếm ..." aria-label="Tìm kiếm bài viết" autocomplete="off">
+        <button type="submit" aria-label="Tìm kiếm">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        </button>
+      </form>
+      <div class="np-box np-recent">
+        <h2>Bài viết mới</h2>
+        <ul id="recent"></ul>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a class="logo" href="index.html"><img class="logo-img" src="logo.png" alt="" onload="this.parentElement.classList.add('has-logo')" onerror="this.style.display='none'"><span class="seal">5</span><span class="nm"><b>THE HANOI TRAIN</b><small>5 CỬA Ô · EST. 2024</small></span></a>
+        <p>Chuyến tàu du lịch khứ hồi Hà Nội - Bắc Ninh.
+        <br>Thưởng thức văn hóa - nghệ thuật - ẩm thực trên tàu
+        <br>Tham quan di tích lịch sử Đền Đô - dâng hương 8 vị vua triều Lý
+        <br>Lắng nghe dân ca quan họ Bắc Ninh trên thuyền rồng, hồ bán nguyệt
+        <br>Dừng chân ngắm cảnh tại cầu Long Biên và check-in với toa tàu ngoài trời độc nhất</p>
+      </div>
+      <div><h4>Liên hệ</h4><ul>
+        <li>☎ <a href="tel:0973453314">Hotline: 097.345.3314</a></li>
+        <li>✉ <a href="mailto:ticket@hanoitrain.vn">ticket@hanoitrain.vn</a></li>
+        <li>📍 Ga Hà Nội, 120 Lê Duẩn, Phường Văn Miếu - Quốc Tử Giám, TP Hà Nội</li>
+        <li>🌐 <a href="https://hanoitrain.vn" target="_blank" rel="noopener">hanoitrain.vn</a></li>
+      </ul></div>
+      <div><h4>Khám phá</h4><ul>
+        <li><a href="index.html#hanh-trinh">Hành trình</a></li>
+        <li><a href="index.html#lich">Lịch chạy</a></li>
+        <li><a href="index.html#toa">Các toa tàu</a></li>
+        <li><a href="index.html#gia-ve">Giá vé</a></li>
+        <li><a href="index.html#form-dat-ve">Form đặt vé</a></li>
+        <li><a href="index.html#anh">Thư viện ảnh</a></li>
+      </ul></div>
+      <div><h4>Chính sách</h4><ul>
+        <li><a href="index.html">Chính sách hoàn vé</a></li>
+        <li><a href="index.html">Hướng dẫn đi tàu</a></li>
+        <li><a href="tin-tuc.html">Tin tức</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-legal">
+      <p><b>KÊNH BÁN VÉ TRỰC TIẾP</b></p>
+      <p>Website được quản lý và phụ trách bởi <b>Phòng Kinh doanh - Tàu Hà Nội 5 Cửa Ô</b></p>
+      <p>Đơn vị vận hành tàu: <b>Công ty Cổ phần Du lịch Dịch vụ Thương mại BHL.</b></p>
+      <p>MST: <b>0110570676</b></p>
+    </div>
+    <div class="ft-bottom">
+      <span>© <span id="year">2026</span> The Hanoi Train · Tàu Hà Nội 5 Cửa Ô</span>
+      <span>CHUYẾN TÀU DU LỊCH VĂN HÓA ĐẦU TIÊN CỦA HÀ NỘI 🚂</span>
+    </div>
+  </div>
+</footer>
+
+<div class="fab-social">
+  <a class="fab-call" href="tel:0973453314" aria-label="Gọi hotline">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg>
+  </a>
+  <a class="fab-zalo" href="https://zalo.me/5cuaohanoi" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
+  <button id="toTop" aria-label="Lên đầu trang">↑</button>
+</div>
+
+<script src="news-config.js"></script>
+<script src="news.js"></script>
+<script>
+(function () {
+  'use strict';
+  var RECENT_N = 8;
+  var $ = function (s) { return document.querySelector(s); };
+  var N = window.HNNews, esc = N.esc;
+
+  /* ===== HEADER / MENU ===== */
+  var header = $('#header'), toTop = $('#toTop'), mm = $('#mmenu');
+  function onScroll() { var y = window.scrollY || 0; header.classList.toggle('scrolled', y > 10); toTop.classList.toggle('show', y > 500); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  function setMenu(o) { mm.classList.toggle('open', o); mm.setAttribute('aria-hidden', o ? 'false' : 'true'); }
+  $('#burger').onclick = function () { setMenu(true); };
+  $('#mclose').onclick = function () { setMenu(false); };
+  [].forEach.call(mm.querySelectorAll('nav a'), function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  toTop.onclick = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  var yr = $('#year'); if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ===== LẤY SLUG: ?bai=ten-bai  hoặc  /ten-bai/ ===== */
+  function getSlug() {
+    var p = new URLSearchParams(location.search).get('bai');
+    if (p) return p;
+    var seg = location.pathname.split('/').filter(Boolean).pop() || '';
+    try { seg = decodeURIComponent(seg); } catch (e) {}
+    return /\.html?$/i.test(seg) ? '' : seg;
+  }
+
+  /* ===== NỘI DUNG: dùng chung với trang admin (news.js) ===== */
+  var renderContent = N.renderContent;
+
+  function notFound() {
+    $('#post').innerHTML = '<p class="np-empty">Không tìm thấy bài viết này. Bài có thể đã bị ẩn hoặc đổi tiêu đề.<br><br><a class="btn btn-green sm" href="tin-tuc.html">Xem tất cả tin tức</a></p>';
+    $('#postNav').innerHTML = '';
+    document.title = 'Không tìm thấy bài viết — Tàu Hà Nội 5 Cửa Ô';
+  }
+
+  function show(it, all) {
+    var img = N.safeUrl(it.image), link = N.linkUrl(it.link);
+    var meta = [];
+    if (it.date) meta.push('<time datetime="' + esc(it.date) + '">' + N.fmtDate(it.date) + '</time>');
+    if (it.author) meta.push('Bởi ' + esc(it.author));
+    if (it.category) meta.push('📁 ' + esc(it.category));
+    $('#post').innerHTML =
+      '<div class="np-crumb"><a href="index.html">Trang chủ</a> › <a href="tin-tuc.html">Tin tức</a></div>' +
+      '<h1 class="post-title">' + esc(it.title) + '</h1>' +
+      (meta.length ? '<div class="news-meta">' + meta.join(' <i>·</i> ') + '</div>' : '') +
+      (img ? '<figure class="post-hero"><img src="' + esc(img) + '" alt="' + esc(it.title) + '" decoding="async" onerror="this.parentNode.parentNode.removeChild(this.parentNode)"></figure>' : '') +
+      '<div class="post-body">' + (it.content ? renderContent(it.content) : '<p>' + esc(it.summary) + '</p>') + '</div>' +
+      (!it.content && link ? '<p style="margin-top:24px"><a class="btn btn-green sm" href="' + esc(link) + '" target="_blank" rel="noopener">Đọc bài đầy đủ →</a></p>' : '');
+    document.title = it.title + ' — Tàu Hà Nội 5 Cửa Ô';
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', it.summary.slice(0, 160));
+
+    var idx = all.indexOf(it), newer = all[idx - 1], older = all[idx + 1], h = '';
+    if (older) h += '<a href="' + esc(N.postUrl(older)) + '"><small>‹ Bài cũ hơn</small>' + esc(older.title) + '</a>';
+    else h += '<span></span>';
+    if (newer) h += '<a class="next" href="' + esc(N.postUrl(newer)) + '"><small>Bài mới hơn ›</small>' + esc(newer.title) + '</a>';
+    $('#postNav').innerHTML = h;
+  }
+
+  var slug = getSlug();
+  N.listPublished().then(function (all) {
+    $('#recent').innerHTML = all.slice(0, RECENT_N).map(function (it) {
+      return '<li><a href="' + esc(N.postUrl(it)) + '">' + esc(it.title) + '</a></li>';
+    }).join('');
+    var it = all.filter(function (x) { return x.slug === slug; })[0];
+    if (it) show(it, all); else notFound();
+  }).catch(function () {
+    $('#post').innerHTML = '<p class="np-empty">Chưa tải được bài viết. Quý khách vui lòng thử lại sau.</p>';
+  });
+})();
+</script>
+</body>
+</html>

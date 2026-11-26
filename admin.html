@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Quản trị tin tức – Tàu Hà Nội 5 Cửa Ô</title>
+<link rel="icon" href="favicon/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFEF9; --cream:#F8F1DE; --ink:#2A2113; --ink2:#5C5138; --ink3:#8A7D5F;
+  --gold:#C9A235; --gold-d:#8F6F1E; --border:#E4D3A5;
+  --maroon:#8E1F2F; --maroon-d:#6E1522; --green:#1E7A46; --red:#B3261E;
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"Be Vietnam Pro",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.55}
+button{font-family:inherit;cursor:pointer}
+.top{background:var(--maroon-d);color:#fff;padding:14px 0;border-bottom:3px solid var(--gold)}
+.wrap{width:min(1180px,94%);margin:0 auto}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.top h1{margin:0;font-family:var(--serif);font-size:1.3rem}
+.top a{color:#E9D8A0;font-weight:600;text-decoration:none;font-size:14px}
+.top a:hover{text-decoration:underline}
+.banner{background:#FFF3CD;border:1px solid #E6C86A;color:#6B4E00;border-radius:10px;padding:12px 16px;margin:18px 0 0;font-size:14px}
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:22px;margin:20px 0;box-shadow:0 10px 28px -18px rgba(96,74,20,.4)}
+h2{font-family:var(--serif);color:var(--maroon);margin:0 0 14px;font-size:1.3rem}
+label{display:block;font-weight:700;font-size:13px;margin:14px 0 6px;color:var(--ink2)}
+label small{font-weight:500;color:var(--ink3)}
+input,textarea,select{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,53,.22)}
+textarea{min-height:90px;resize:vertical}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.chk{display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:16px}
+.chk input{width:auto}
+.b-pin{background:#FBE8B8;color:#7A5A00}
+@media(max-width:900px){.row{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+.btn{border:0;border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px;transition:transform .2s,box-shadow .2s,opacity .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-main{background:var(--maroon);color:#fff;box-shadow:0 8px 18px -8px rgba(142,31,47,.6)}
+.btn-ghost{background:transparent;color:var(--maroon);border:1.5px solid var(--maroon)}
+.btn-sm{padding:6px 14px;font-size:12.5px}
+.btn-del{background:transparent;color:var(--red);border:1.5px solid var(--red)}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.preview{margin-top:10px;width:220px;aspect-ratio:16/10;border-radius:10px;border:1.5px dashed var(--border);background:#fff center/cover no-repeat;display:grid;place-items:center;color:var(--ink3);font-size:12px}
+.err{color:var(--red);font-size:13px;margin-top:8px;min-height:1em}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+td.t{font-weight:600;min-width:200px}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.b-pub{background:#DDF3E5;color:var(--green)}
+.b-draft{background:#EEE;color:#666}
+.empty{text-align:center;color:var(--ink3);padding:26px 0}
+.tbl{overflow-x:auto}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.3s;z-index:9}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#login{max-width:420px;margin:70px auto}
+[hidden]{display:none !important}
+
+/* ===== Trình soạn thảo (như Word thu nhỏ) ===== */
+.ed-wrap{border:1.5px solid var(--border);border-radius:12px;background:#fff;overflow:hidden}
+.ed-wrap:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,53,.22)}
+.ed-bar{display:flex;flex-wrap:wrap;align-items:center;gap:2px;padding:6px 8px;background:#FBF6E6;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:3}
+.ed-bar button{width:32px;height:32px;padding:0;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:15px;line-height:1;display:inline-grid;place-items:center}
+.ed-bar button:hover{background:#F1E6C8}
+.ed-bar button.on{background:#E9D8A0}
+.ed-bar button:disabled{opacity:.35;cursor:default}
+.ed-bar select{width:auto;padding:5px 8px;border-radius:8px;font-size:13px;border-width:1px}
+.ed-bar .sep{width:1px;height:22px;background:var(--border);margin:0 5px}
+.ed-bar .sz{min-width:26px;text-align:center;font-size:13px;font-weight:700;color:var(--ink2)}
+.ed-bar svg{display:block}
+.ed-pop{padding:10px 12px;background:#FFFCF0;border-bottom:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ed-pop input{width:auto;flex:1 1 200px;padding:8px 10px;font-size:13.5px}
+.ed-pop .btn{padding:8px 16px;font-size:13px}
+.ed-pop .sw{width:26px;height:26px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--border2,#D6C088);padding:0}
+.ed-pop .sw.none{background:#fff;position:relative}
+.ed-pop .sw.none::after{content:"";position:absolute;left:3px;right:3px;top:50%;height:2px;background:var(--red);transform:rotate(-45deg)}
+.ed-pop small{width:100%;color:var(--ink3);font-size:12px}
+.ed{min-height:380px;max-height:70vh;overflow:auto;padding:18px 22px;font-size:17px;line-height:1.8;outline:none;word-wrap:break-word}
+.ed:empty::before{content:attr(data-ph);color:var(--ink3);pointer-events:none}
+.ed p{margin:0 0 1.1em}
+.ed h2{font-family:var(--serif);font-size:1.5rem;color:var(--maroon);margin:1.2em 0 .5em;line-height:1.3}
+.ed h3{font-family:var(--serif);font-size:1.2rem;color:var(--maroon);margin:1.1em 0 .5em}
+.ed ul,.ed ol{margin:0 0 1.1em;padding-left:1.5em}
+.ed blockquote{margin:1.2em 0;padding:.6em 1.1em;border-left:4px solid var(--gold);background:var(--cream);color:var(--ink2);border-radius:0 6px 6px 0}
+.ed blockquote p{margin:0}
+.ed a{color:var(--maroon);text-decoration:underline}
+.ed figure{margin:1.2em 0;padding:6px;border:1px dashed transparent;border-radius:8px}
+.ed figure.sel{border-color:var(--gold);background:#FFFCF0}
+.ed figure img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:6px;cursor:pointer}
+.ed figcaption{font-size:13.5px;color:var(--ink3);text-align:center;margin-top:8px;min-height:1.2em}
+.ed .ta-center{text-align:center}.ed .ta-right{text-align:right}.ed .ta-justify{text-align:justify}
+.ed .fs1,.ed font[size="1"],.ed [style*="font-size: x-small"]{font-size:.7em !important}
+.ed .fs2,.ed font[size="2"],.ed [style*="font-size: small"]{font-size:.85em !important}
+.ed .fs4,.ed font[size="4"],.ed [style*="font-size: large"]{font-size:1.2em !important}
+.ed .fs5,.ed font[size="5"],.ed [style*="font-size: x-large"]{font-size:1.45em !important}
+.ed .fs6,.ed font[size="6"],.ed [style*="font-size: xx-large"]{font-size:1.8em !important}
+.ed .fs7,.ed font[size="7"],.ed [style*="font-size: xxx-large"]{font-size:2.2em !important}
+.ed-wrap.drag{border-color:var(--maroon);box-shadow:0 0 0 4px rgba(142,31,47,.18)}
+.ed-wrap.drag .ed{background:#FFF8E6}
+.ed img[data-up]{opacity:.5;outline:2px dashed var(--gold);outline-offset:2px}
+.ed-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:6px 12px;border-top:1px solid var(--border);background:#FBF6E6;font-size:12px;color:var(--ink3)}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <h1>🚂 Quản trị tin tức</h1>
+  <span><a href="index.html#tin-tuc" target="_blank" rel="noopener">Xem trang web ↗</a>
+  <a href="#" id="logout" hidden style="margin-left:16px">Đăng xuất</a></span>
+</div></div>
+
+<!-- ĐĂNG NHẬP -->
+<div class="wrap" id="login" hidden>
+  <form class="card" id="loginForm">
+    <h2>Đăng nhập quản trị</h2>
+    <label for="pw">Mật khẩu</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <div class="err" id="loginErr"></div>
+    <div class="actions"><button class="btn btn-main" type="submit">Đăng nhập</button></div>
+  </form>
+</div>
+
+<!-- TRANG QUẢN TRỊ -->
+<main class="wrap" id="app" hidden>
+  <div class="banner" id="demoBanner" hidden>
+    ⚠️ <b>Chế độ DEMO:</b> chưa kết nối Google Sheet nên tin chỉ được lưu <b>trong trình duyệt này</b> (mở trang chủ cùng trình duyệt để xem thử). Muốn lưu thật, dán link Apps Script vào file <b>news-config.js</b>.
+    <button class="btn btn-ghost btn-sm" id="resetDemo" style="margin-left:8px">Xóa dữ liệu demo</button>
+  </div>
+
+  <section class="card">
+    <h2 id="formTitle">Thêm bài viết mới</h2>
+    <form id="f" novalidate>
+      <input type="hidden" id="fId">
+      <label for="fTitle">Tiêu đề *</label>
+      <input id="fTitle" maxlength="200">
+      <label for="fSummary">Mô tả ngắn * <small>(hiện dưới tiêu đề, tối đa 600 ký tự)</small></label>
+      <textarea id="fSummary" maxlength="600"></textarea>
+      <label id="lblContent">Nội dung bài viết <small>(soạn trực tiếp như Word: bôi đen chữ rồi bấm nút trên thanh công cụ)</small></label>
+      <div class="ed-wrap">
+        <div class="ed-bar" id="edBar" role="toolbar" aria-label="Công cụ soạn thảo"></div>
+        <div class="ed-pop" id="edPop" hidden></div>
+        <div class="ed" id="ed" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="lblContent" data-ph="Bắt đầu viết bài tại đây…"></div>
+        <div class="ed-foot"><span>Kéo thả ảnh vào khung hoặc dán ảnh (Ctrl+V) · bấm vào ảnh rồi bấm 🗑 để xóa · dán chữ sẽ tự bỏ định dạng cũ</span><span id="edCount"></span></div>
+      </div>
+      <label for="fImage">Link ảnh <small>(dán link ảnh, hoặc đường dẫn trong thư mục web, ví dụ news/anh-1.jpg)</small></label>
+      <input id="fImage" placeholder="https://...">
+      <div class="preview" id="prev">Chưa có ảnh</div>
+      <label for="fLink">Link bài viết đầy đủ <small>(không bắt buộc – có link thì tiêu đề và ảnh bấm được)</small></label>
+      <input id="fLink" placeholder="https://...">
+      <div class="row">
+        <div><label for="fCat">Chuyên mục <small>(ví dụ: Cẩm nang đi tàu)</small></label><input id="fCat" maxlength="40"></div>
+        <div><label for="fAuthor">Tác giả <small>(không bắt buộc)</small></label><input id="fAuthor" maxlength="60"></div>
+        <div><label for="fDate">Ngày đăng</label><input id="fDate" type="date"></div>
+        <div><label for="fStatus">Trạng thái</label>
+          <select id="fStatus"><option value="published">Đăng lên web</option><option value="draft">Bản nháp (ẩn)</option></select></div>
+      </div>
+      <label class="chk"><input type="checkbox" id="fPinned"> 📌 <b>Ghim lên trang chủ</b> <small>(chỉ bài được ghim mới hiện ở mục Tin tức)</small></label>
+      <div class="err" id="fErr"></div>
+      <div class="actions">
+        <button class="btn btn-main" type="submit" id="btnSave">Lưu bài viết</button>
+        <button class="btn btn-ghost" type="button" id="btnNew">Làm mới form</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Danh sách bài viết <small id="count" style="font-family:var(--sans);font-size:13px;color:var(--ink3)"></small></h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Ngày</th><th>Tiêu đề</th><th>Chuyên mục</th><th>Trạng thái</th><th>Ghim</th><th></th></tr></thead>
+        <tbody id="list"><tr><td colspan="6" class="empty">Đang tải…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<div id="toast" role="status"></div>
+
+<script src="news-config.js"></script>
+<script src="news.js"></script>
+<script>
+(function () {
+  var N = window.HNNews, pw = '', items = [];
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = 'hn_admin_pw';
+
+  function toast(m) {
+    var t = $('toast'); t.textContent = m; t.classList.add('show');
+    clearTimeout(toast.t); toast.t = setTimeout(function () { t.classList.remove('show'); }, 3200);
+  }
+  function store(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {} }
+  function stored() { try { return sessionStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
+  function today() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+
+
+  // ================= TRÌNH SOẠN THẢO NỘI DUNG =================
+  var ed = $('ed'), bar = $('edBar'), pop = $('edPop'), saved = null, selFig = null, MAXC = 40000;
+  var EM = [0, .7, .85, 1, 1.2, 1.45, 1.8, 2.2], FSK = { 'x-small': 1, small: 2, medium: 3, large: 4, 'x-large': 5, 'xx-large': 6, 'xxx-large': 7 };
+  var TXT = ['#2A2113', '#8E1F2F', '#8F6F1E', '#1E7A46', '#1F4E9E', '#6B6B6B', '#D32F2F', '#E67E22', '#000000'];
+  var HIL = ['#FFF2A8', '#D7F2DE', '#FADADD', '#D6E6FA', '#F8E1B5', '#E4D9F5'];
+  function al(t) { // biểu tượng căn lề
+    var w = { l: [14, 10, 14, 8], c: [14, 10, 14, 8], r: [14, 10, 14, 8], j: [14, 14, 14, 14] }[t], y = [3, 7, 11, 15], o = '';
+    for (var i = 0; i < 4; i++) { var x = t === 'l' || t === 'j' ? 2 : t === 'c' ? (18 - w[i]) / 2 : 16 - w[i]; o += '<rect x="' + x + '" y="' + y[i] + '" width="' + w[i] + '" height="2" rx="1" fill="currentColor"/>'; }
+    return '<svg width="18" height="18" viewBox="0 0 18 20">' + o + '</svg>';
+  }
+  var BTN = [
+    ['undo', '↶', 'Hoàn tác (Ctrl+Z)'], ['redo', '↷', 'Làm lại (Ctrl+Y)'], '|', 'block', '|',
+    ['sizeDown', '−', 'Giảm cỡ chữ'], 'size', ['sizeUp', '+', 'Tăng cỡ chữ'], '|',
+    ['bold', '<b>B</b>', 'Chữ đậm (Ctrl+B)'], ['italic', '<i>I</i>', 'Chữ nghiêng (Ctrl+I)'], ['underline', '<u>U</u>', 'Gạch chân (Ctrl+U)'], '|',
+    ['color', '<span style="font-weight:800;border-bottom:3px solid var(--maroon)">A</span>', 'Màu chữ'],
+    ['hilite', '<span style="font-weight:800;background:#FFF2A8;padding:0 3px">A</span>', 'Tô nền chữ'], '|',
+    ['link', '🔗', 'Chèn link'], ['unlink', '<span style="text-decoration:line-through">🔗</span>', 'Gỡ link'], '|',
+    ['justifyLeft', al('l'), 'Căn trái'], ['justifyCenter', al('c'), 'Căn giữa'], ['justifyRight', al('r'), 'Căn phải'], ['justifyFull', al('j'), 'Căn đều'], '|',
+    ['insertUnorderedList', '•≡', 'Danh sách gạch đầu dòng'], ['insertOrderedList', '1.', 'Danh sách đánh số'], '|',
+    ['image', '🖼', 'Chèn ảnh'], ['delImg', '🗑', 'Xóa ảnh đang chọn'], '|', ['clear', 'Tx', 'Xóa định dạng']
+  ];
+  bar.innerHTML = BTN.map(function (b) {
+    if (b === '|') return '<span class="sep"></span>';
+    if (b === 'block') return '<select id="edBlock" title="Kiểu đoạn"><option value="p">Đoạn thường</option><option value="h2">Tiêu đề lớn</option><option value="h3">Tiêu đề nhỏ</option><option value="blockquote">Trích dẫn</option></select>';
+    if (b === 'size') return '<span class="sz" id="edSize" title="Cỡ chữ hiện tại">17</span>';
+    return '<button type="button" data-c="' + b[0] + '" title="' + b[2] + '" aria-label="' + b[2] + '">' + b[1] + '</button>';
+  }).join('');
+  $('edSize').textContent = '17';
+  bar.addEventListener('mousedown', function (e) { if (e.target.closest('button')) e.preventDefault(); }); // giữ vùng bôi đen
+
+  document.addEventListener('selectionchange', function () {
+    var s = window.getSelection();
+    if (s.rangeCount && ed.contains(s.anchorNode)) { saved = s.getRangeAt(0).cloneRange(); sync(); }
+  });
+  function restore() {
+    ed.focus();
+    if (saved) { var s = window.getSelection(); s.removeAllRanges(); s.addRange(saved); }
+  }
+  function run(cmd, val, css) {
+    restore();
+    try { document.execCommand('defaultParagraphSeparator', false, 'p'); document.execCommand('styleWithCSS', false, !!css); } catch (e) {}
+    document.execCommand(cmd, false, val == null ? null : val);
+    sync(); count();
+  }
+  function sizeAt() {
+    var n = saved && saved.startContainer;
+    while (n && n !== ed) {
+      if (n.nodeType === 1) {
+        var m = /(?:^|\s)fs([1-7])(?:\s|$)/.exec(n.getAttribute('class') || '');
+        if (m) return +m[1];
+        if (n.style && FSK[n.style.fontSize]) return FSK[n.style.fontSize];
+        if (n.tagName === 'FONT' && n.getAttribute('size')) return +n.getAttribute('size');
+      }
+      n = n.parentNode;
+    }
+    return 3;
+  }
+  function sync() {
+    try {
+      $('edSize').textContent = Math.round(17 * EM[sizeAt()]);
+      var v = String(document.queryCommandValue('formatBlock') || '').replace(/[<>]/g, '').toLowerCase();
+      $('edBlock').value = /^(h2|h3|blockquote)$/.test(v) ? v : 'p';
+      ['bold', 'italic', 'underline', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', 'insertUnorderedList', 'insertOrderedList'].forEach(function (c) {
+        var b = bar.querySelector('[data-c="' + c + '"]'); if (b) b.classList.toggle('on', document.queryCommandState(c));
+      });
+    } catch (e) {}
+    var d = bar.querySelector('[data-c="delImg"]'); if (d) d.disabled = !selFig;
+  }
+  function closePop() { pop.hidden = true; pop.innerHTML = ''; }
+  function swatches(kind) {
+    var list = kind === 'color' ? TXT : HIL;
+    pop.innerHTML = '<small>' + (kind === 'color' ? 'Chọn màu chữ:' : 'Chọn màu tô nền:') + '</small>' +
+      list.map(function (c) { return '<button type="button" class="sw" data-col="' + c + '" style="background:' + c + '" aria-label="' + c + '"></button>'; }).join('') +
+      '<button type="button" class="sw none" data-col="" aria-label="Bỏ màu"></button>';
+    pop.hidden = false;
+    pop.onclick = function (e) {
+      var b = e.target.closest('button[data-col]'); if (!b) return;
+      var c = b.dataset.col;
+      if (kind === 'color') run('foreColor', c || TXT[0], true);
+      else { try { run('hiliteColor', c || 'transparent', true); } catch (x) { run('backColor', c || 'transparent', true); } }
+      closePop();
+    };
+  }
+  function askLink() {
+    pop.innerHTML = '<input id="popUrl" placeholder="Dán link bất kỳ: https://..., www..., email, số điện thoại" aria-label="Link"><button type="button" class="btn btn-main" id="popOk">Gắn link</button><button type="button" class="btn btn-ghost" id="popNo">Hủy</button><small id="popErr" style="color:var(--red)"></small>';
+    pop.hidden = false; $('popUrl').focus();
+    $('popNo').onclick = closePop;
+    var go = function () {
+      var u = N.linkUrl($('popUrl').value);
+      if (!u) { $('popErr').textContent = 'Vui lòng nhập link.'; return; }
+      if (saved && saved.collapsed) run('insertHTML', '<a href="' + N.esc(u) + '">' + N.esc(u) + '</a>');
+      else run('createLink', u);
+      closePop();
+    };
+    $('popOk').onclick = go;
+    $('popUrl').onkeydown = function (e) { if (e.key === 'Enter') { e.preventDefault(); go(); } };
+  }
+  function askImage() {
+    pop.innerHTML = '<button type="button" class="btn btn-main" id="popPick">📁 Chọn ảnh từ máy</button><input type="file" id="popFile" accept="image/*" multiple hidden><small style="width:auto">hoặc kéo thả / dán ảnh thẳng vào khung soạn. Hoặc dùng link ảnh:</small>' +
+      '<input id="popImg" placeholder="Link ảnh: https://... hoặc news/anh-1.jpg" aria-label="Link ảnh"><input id="popCap" placeholder="Chú thích ảnh (không bắt buộc)" aria-label="Chú thích"><button type="button" class="btn btn-main" id="popOk">Chèn ảnh</button><button type="button" class="btn btn-ghost" id="popNo">Hủy</button><small id="popErr" style="color:var(--red)">Ảnh sẽ chèn tại vị trí con trỏ. Chèn được nhiều ảnh.</small>';
+    pop.hidden = false; $('popImg').focus();
+    $('popPick').onclick = function () { $('popFile').click(); };
+    $('popFile').onchange = function () { var fl = this.files; closePop(); addImages(fl); };
+    $('popNo').onclick = closePop;
+    $('popOk').onclick = function () {
+      var u = N.safeUrl($('popImg').value), cap = $('popCap').value.trim();
+      if (!u) { $('popErr').textContent = 'Vui lòng nhập link ảnh hợp lệ.'; return; }
+      run('insertHTML', '<figure><img src="' + N.esc(u) + '" alt="' + N.esc(cap) + '">' + (cap ? '<figcaption>' + N.esc(cap) + '</figcaption>' : '') + '</figure><p><br></p>');
+      closePop();
+    };
+  }
+  bar.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-c]'); if (!b) return;
+    var c = b.dataset.c;
+    if (c !== 'color' && c !== 'hilite' && c !== 'link' && c !== 'image') closePop();
+    if (c === 'sizeUp' || c === 'sizeDown') { restore(); run('fontSize', Math.max(1, Math.min(7, sizeAt() + (c === 'sizeUp' ? 1 : -1))), true); }
+    else if (c === 'color' || c === 'hilite') swatches(c === 'color' ? 'color' : 'hilite');
+    else if (c === 'link') askLink();
+    else if (c === 'image') askImage();
+    else if (c === 'delImg') { if (selFig) { selFig.remove(); selFig = null; sync(); count(); } }
+    else if (c === 'clear') { run('removeFormat'); run('formatBlock', '<p>'); }
+    else if (/^justify/.test(c)) run(c, null, true);
+    else run(c);
+  });
+  $('edBlock').addEventListener('change', function () { run('formatBlock', '<' + this.value + '>'); });
+  ed.addEventListener('click', function (e) {
+    var f = e.target.tagName === 'IMG' ? e.target.closest('figure') : null;
+    [].forEach.call(ed.querySelectorAll('figure.sel'), function (x) { x.classList.remove('sel'); });
+    selFig = f; if (f) f.classList.add('sel'); sync();
+  });
+  ed.addEventListener('focus', function () { if (!ed.innerHTML.trim()) ed.innerHTML = '<p><br></p>'; });
+  ed.addEventListener('paste', function (e) {
+    var cd = e.clipboardData || window.clipboardData, files = imageFiles(cd && cd.files), txt = cd ? cd.getData('text/plain') : '';
+    e.preventDefault();
+    if (files.length && !String(txt).trim()) { addImages(files); return; } // dán ảnh (chụp màn hình, copy ảnh)
+    document.execCommand('insertText', false, txt); // dán chữ thuần để không kéo theo định dạng lạ
+  });
+  var wrapEd = ed.parentNode;
+  ['dragenter', 'dragover'].forEach(function (t) {
+    wrapEd.addEventListener(t, function (e) { e.preventDefault(); wrapEd.classList.add('drag'); });
+  });
+  wrapEd.addEventListener('dragleave', function (e) { if (!wrapEd.contains(e.relatedTarget)) wrapEd.classList.remove('drag'); });
+  wrapEd.addEventListener('drop', function (e) {
+    e.preventDefault(); wrapEd.classList.remove('drag');
+    if (!ed.contains(e.target) && e.target !== ed) return;
+    var r = null, x = e.clientX, y = e.clientY;
+    if (document.caretRangeFromPoint) r = document.caretRangeFromPoint(x, y);
+    else if (document.caretPositionFromPoint) { var cp = document.caretPositionFromPoint(x, y); if (cp) { r = document.createRange(); r.setStart(cp.offsetNode, cp.offset); r.collapse(true); } }
+    if (r && ed.contains(r.startContainer)) saved = r;
+    var dt = e.dataTransfer, files = imageFiles(dt && dt.files);
+    if (files.length) { addImages(files); return; }
+    // kéo ảnh từ trang web khác: lấy link ảnh
+    var html = dt ? dt.getData('text/html') : '', m = /<img[^>]+src=["']([^"']+)["']/i.exec(html || '');
+    if (m && /^https?:\/\//i.test(m[1])) insertFigure(m[1], '');
+    else toast('Hãy kéo file ảnh từ máy tính vào khung.');
+  });
+  ed.addEventListener('input', count);
+  var ct;
+  function count() { clearTimeout(ct); ct = setTimeout(function () { var n = contentValue().length; $('edCount').textContent = n + ' / ' + MAXC + ' ký tự' ; $('edCount').style.color = n > MAXC ? 'var(--red)' : ''; }, 200); }
+  function contentValue() {
+    var h = N.sanitize(ed.innerHTML);
+    if (!h.replace(/<(?!img)[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim() && h.indexOf('<img') < 0) return '';
+    return N.HTML_MARK + h;
+  }
+  // ---------- Ảnh: kéo thả / dán / chọn từ máy ----------
+  var upChain = Promise.resolve(), upId = 0;
+  function imageFiles(list) {
+    return [].filter.call(list || [], function (f) { return /^image\//.test(f.type) && !/svg/.test(f.type); });
+  }
+  function readDataUrl(b) { return new Promise(function (ok, no) { var r = new FileReader(); r.onload = function () { ok(r.result); }; r.onerror = no; r.readAsDataURL(b); }); }
+  function loadImg(src) { return new Promise(function (ok, no) { var i = new Image(); i.onload = function () { ok(i); }; i.onerror = no; i.src = src; }); }
+  // Thu nhỏ + nén ảnh trước khi tải lên (nhẹ web, nhanh hơn)
+  function prepare(file) {
+    var MAXD = N.hasApi ? 1600 : 900, Q = N.hasApi ? .85 : .7;
+    if (file.type === 'image/gif' && file.size <= 2.5 * 1024 * 1024 && N.hasApi) return readDataUrl(file);
+    return readDataUrl(file).then(function (orig) {
+      return loadImg(orig).then(function (im) {
+        var w = im.naturalWidth, h = im.naturalHeight, k = Math.min(1, MAXD / Math.max(w, h));
+        var c = document.createElement('canvas'), x;
+        c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k));
+        x = c.getContext('2d'); x.drawImage(im, 0, 0, c.width, c.height);
+        var out = c.toDataURL('image/webp', Q);
+        if (out.indexOf('data:image/webp') !== 0) { // trình duyệt không hỗ trợ webp -> jpeg nền trắng
+          x.globalCompositeOperation = 'destination-over'; x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+          out = c.toDataURL('image/jpeg', Q);
+        }
+        if (k === 1 && /^image\/(png|jpeg|webp)$/.test(file.type) && orig.length <= out.length) out = orig;
+        if (out.length > 3800000) throw new Error('big');
+        return out;
+      });
+    });
+  }
+  function insertFigure(src, id) {
+    run('insertHTML', '<figure><img src="' + N.esc(src) + '" alt=""' + (id ? ' data-up="' + id + '"' : '') + '></figure><p><br></p>');
+  }
+  function addImages(list) {
+    var files = imageFiles(list);
+    if (!files.length) { toast('Chỉ chèn được file ảnh (jpg, png, webp, gif).'); return; }
+    files.forEach(function (f) {
+      var id = 'u' + (++upId);
+      upChain = upChain.then(function () {
+        return prepare(f).then(function (data) {
+          insertFigure(data, id);
+          return N.upload(data, pw).then(function (url) {
+            var im = ed.querySelector('img[data-up="' + id + '"]');
+            if (im) { im.setAttribute('src', url); im.removeAttribute('data-up'); }
+            count();
+          });
+        });
+      }).catch(function (err) {
+        var im = ed.querySelector('img[data-up="' + id + '"]');
+        if (im) { var fg = im.closest('figure'); (fg || im).remove(); }
+        toast(err && err.message === 'big' ? 'Ảnh quá lớn, hãy chọn ảnh nhỏ hơn.' : err && err.message === 'auth' ? 'Phiên đăng nhập hết hạn, hãy tải lại trang.' : 'Không tải được ảnh lên. Kiểm tra lại Apps Script (xem hướng dẫn) rồi thử lại.');
+        count();
+      });
+    });
+  }
+
+  function setEditor(content) {
+    ed.innerHTML = content ? N.renderContent(content) : '';
+    selFig = null; saved = null; closePop(); sync(); count();
+  }
+
+  // ---- Vào trang quản trị ----
+  function enter() {
+    $('login').hidden = true; $('app').hidden = false;
+    $('logout').hidden = N.hasApi ? false : true;
+    $('demoBanner').hidden = N.hasApi;
+    resetForm(); refresh();
+  }
+  function showLogin(msg) {
+    $('app').hidden = true; $('login').hidden = false; $('logout').hidden = true;
+    $('loginErr').textContent = msg || '';
+  }
+  if (!N.hasApi) { enter(); }
+  else {
+    var p = stored();
+    if (p) N.auth(p).then(function (ok) { if (ok) { pw = p; enter(); } else { store(''); showLogin(); } }, function () { showLogin(); });
+    else showLogin();
+  }
+  $('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('pw').value;
+    $('loginErr').textContent = 'Đang kiểm tra…';
+    N.auth(v).then(function (ok) {
+      if (ok) { pw = v; store(v); enter(); } else $('loginErr').textContent = 'Sai mật khẩu.';
+    }, function () { $('loginErr').textContent = 'Không kết nối được máy chủ. Kiểm tra lại link Apps Script.'; });
+  });
+  $('logout').addEventListener('click', function (e) { e.preventDefault(); pw = ''; store(''); $('pw').value = ''; showLogin(); });
+  $('resetDemo').addEventListener('click', function () {
+    if (confirm('Xóa dữ liệu demo và quay về tin mẫu ban đầu?')) { N.resetDemo(); refresh(); resetForm(); }
+  });
+
+  // ---- Danh sách ----
+  function refresh() {
+    N.listAll(pw).then(function (list) { items = list; render(); }, function () {
+      $('list').innerHTML = '<tr><td colspan="6" class="empty">Không tải được danh sách. Thử tải lại trang.</td></tr>';
+    });
+  }
+  function render() {
+    $('count').textContent = '(' + items.length + ' bài)';
+    if (!items.length) { $('list').innerHTML = '<tr><td colspan="6" class="empty">Chưa có bài viết nào.</td></tr>'; return; }
+    $('list').innerHTML = items.map(function (it) {
+      var pub = it.status !== 'draft';
+      return '<tr data-id="' + N.esc(it.id) + '">' +
+        '<td>' + N.esc(N.fmtDate(it.date)) + '</td>' +
+        '<td class="t">' + N.esc(it.title) + '</td>' +
+        '<td>' + N.esc(it.category) + '</td>' +
+        '<td><span class="badge ' + (pub ? 'b-pub' : 'b-draft') + '">' + (pub ? 'Đang đăng' : 'Bản nháp') + '</span></td>' +
+        '<td>' + (it.pinned ? '<span class="badge b-pin">📌 Đã ghim</span>' : '<span style="color:var(--ink3)">—</span>') + '</td>' +
+        '<td><div class="tools">' +
+          '<button class="btn btn-ghost btn-sm" data-a="edit">Sửa</button>' +
+          '<button class="btn btn-ghost btn-sm" data-a="pin">' + (it.pinned ? 'Bỏ ghim' : 'Ghim') + '</button>' +
+          '<button class="btn btn-ghost btn-sm" data-a="toggle">' + (pub ? 'Ẩn' : 'Đăng') + '</button>' +
+          '<button class="btn btn-del btn-sm" data-a="del">Xóa</button>' +
+        '</div></td></tr>';
+    }).join('');
+  }
+  $('list').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-a]'); if (!b) return;
+    var id = b.closest('tr').dataset.id;
+    var it = items.filter(function (x) { return x.id === id; })[0]; if (!it) return;
+    var a = b.dataset.a;
+    if (a === 'edit') { fill(it); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    if (a === 'pin') {
+      var p2 = Object.assign({}, it, { pinned: !it.pinned });
+      N.save(p2, pw).then(function () { toast(p2.pinned ? 'Đã ghim lên trang chủ' : 'Đã bỏ ghim'); refresh(); }, fail);
+    }
+    if (a === 'toggle') {
+      var c = Object.assign({}, it, { status: it.status === 'draft' ? 'published' : 'draft' });
+      N.save(c, pw).then(function () { toast(c.status === 'draft' ? 'Đã ẩn bài viết' : 'Đã đăng bài viết'); refresh(); }, fail);
+    }
+    if (a === 'del') {
+      if (!confirm('Xóa bài "' + it.title + '"? Không thể khôi phục.')) return;
+      N.remove(id, pw).then(function () { toast('Đã xóa bài viết'); if ($('fId').value === id) resetForm(); refresh(); }, fail);
+    }
+  });
+  function fail(err) {
+    if (err && err.message === 'auth') { store(''); showLogin('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại.'); return; }
+    toast('Có lỗi xảy ra, vui lòng thử lại.');
+  }
+
+  // ---- Form ----
+  function preview() {
+    var u = N.safeUrl($('fImage').value), p = $('prev');
+    if (!u) { p.style.backgroundImage = ''; p.textContent = 'Chưa có ảnh'; return; }
+    p.textContent = '';
+    p.style.backgroundImage = 'url("' + u.replace(/"/g, '%22') + '")';
+  }
+  function fill(it) {
+    $('formTitle').textContent = 'Sửa bài viết';
+    $('fId').value = it.id; $('fTitle').value = it.title; $('fSummary').value = it.summary;
+    $('fImage').value = it.image; $('fLink').value = it.link; $('fCat').value = it.category; $('fAuthor').value = it.author || ''; $('fPinned').checked = !!it.pinned;
+    $('fDate').value = it.date; $('fStatus').value = it.status === 'draft' ? 'draft' : 'published';
+    setEditor(it.content);
+    $('fErr').textContent = ''; preview();
+  }
+  function resetForm() {
+    $('formTitle').textContent = 'Thêm bài viết mới';
+    $('f').reset(); $('fId').value = ''; $('fDate').value = today(); $('fErr').textContent = ''; setEditor(''); preview();
+  }
+  $('fImage').addEventListener('input', preview);
+  $('btnNew').addEventListener('click', resetForm);
+
+  function badUrl(v) { return v.trim() && !N.safeUrl(v); }
+  function badLink(v) { return v.trim() && !N.linkUrl(v); }
+  $('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var it = {
+      id: $('fId').value, title: $('fTitle').value, summary: $('fSummary').value,
+      content: contentValue(),
+      image: $('fImage').value, link: $('fLink').value, category: $('fCat').value,
+      author: $('fAuthor').value, pinned: $('fPinned').checked,
+      date: $('fDate').value || today(), status: $('fStatus').value
+    };
+    var err = '';
+    if (!it.title.trim()) err = 'Vui lòng nhập tiêu đề.';
+    else if (!it.summary.trim()) err = 'Vui lòng nhập mô tả ngắn.';
+    else if (ed.querySelector('img[data-up]')) err = 'Ảnh đang được tải lên, vui lòng đợi vài giây rồi lưu.';
+    else if (it.content.length > MAXC) err = 'Nội dung quá dài (' + it.content.length + '/' + MAXC + ' ký tự). Hãy rút ngắn hoặc bớt ảnh.';
+    else if (badUrl(it.image)) err = 'Link ảnh phải bắt đầu bằng https:// (hoặc là đường dẫn trong thư mục web).';
+    else if (badLink(it.link)) err = 'Link bài viết đầy đủ không hợp lệ.';
+    $('fErr').textContent = err; if (err) return;
+    var btn = $('btnSave'); btn.disabled = true; btn.textContent = 'Đang lưu…';
+    N.save(it, pw).then(function () {
+      toast(it.id ? 'Đã cập nhật bài viết' : 'Đã thêm bài viết'); resetForm(); refresh();
+    }, fail).then(function () { btn.disabled = false; btn.textContent = 'Lưu bài viết'; });
+  });
+})();
+</script>
+</body>
+</html>
